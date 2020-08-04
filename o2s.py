@@ -45,6 +45,7 @@ with open(sys.argv[1]) as f:
   code = f.read()
 
 # Step 1: delete `module type` declarations and dedent `module` definitions
+# Dedenting is necessary because top-level definitions must not be placed into `let` blocks.
 
 def indent_size(s): return len(s) - len(s.lstrip())
 

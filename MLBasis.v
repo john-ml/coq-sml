@@ -8,6 +8,7 @@ Extract Constant ML "'a" => "'a".
 Extract Inlined Constant ml_ret => "(fun x -> x)".
 Extract Inlined Constant ml_bind => "(fun x k -> k x)".
 
+(* Some integers, just for testing *)
 Axiom int : Type.
 Axiom zero : int.
 Axiom three : int.
