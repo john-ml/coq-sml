@@ -99,6 +99,10 @@ code = 'type box___ = unit\nval box___ = ()\n\n' + seq(
     'function(\\s*)\\|',
     lambda: (lambda x: f'fn {x} => case {x} of\\1 ')(fresh()),
     count=1)),
+  # (fn x .. => ..) --> (fn x => .. => ..)
+  fix(re_sub(
+    f'fn((\\s+{ident})+)(\\s+{ident}\\s*)=>',
+    'fn\\1 => fn\\3=>')),
   # (let rec? f x .. = ..) --> (val rec? f = fn x => .. => ..)
   fix(re_sub(
     f'(let rec|and|let(?!\\s+rec\\s+))((\\s+{ident})+)(\\s+{ident}\\s*)=',
@@ -129,7 +133,7 @@ code = 'type box___ = unit\nval box___ = ()\n\n' + seq(
 #   In this case skip forward and insert `end` immediately after the matching `)`.
 
 temp_file = 'temp_out.sml' # File to be read by SMLNJ
-debug = True # Print diffs at each step
+debug = False # Print diffs at each step
 
 # code : List[String], row col : int -> (row', col') : int * int
 # Get next row-col coord
