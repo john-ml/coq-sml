@@ -93,4 +93,67 @@ End TestInt.
 
 (** * Words *)
 
+Module Type WORD.
+  Axiom word : Set.
+  Axiom zero one : word.
+  Axiom double : word -> word.
+  Axiom wordSize : Int.int.
+  Axiom toInt : word -> Int.int.
+  Axiom toIntX : word -> ML Int.int.
+  Axiom fromInt : Int.int -> word.
+  Axiom andb orb xorb : word -> word -> word.
+  Axiom notb : word -> word.
+  Axiom add sub mul : word -> word -> word.
+  Axiom div mod : word -> word -> ML word.
+  Axiom lt le gt ge : word -> word -> bool.
+  Axiom compl : word -> word.
+  Axiom min max : word -> word -> word.
+End WORD.
 
+Module Word <: WORD.
+  Axiom word : Set.
+  Axiom zero one : word.
+  Axiom double : word -> word.
+  Axiom wordSize : Int.int.
+  Axiom toInt : word -> Int.int.
+  Axiom toIntX : word -> ML Int.int.
+  Axiom fromInt : Int.int -> word.
+  Axiom andb orb xorb : word -> word -> word.
+  Axiom notb : word -> word.
+  Axiom add sub mul : word -> word -> word.
+  Axiom div mod : word -> word -> ML word.
+  Axiom lt le eq gt ge : word -> word -> bool.
+  Axiom compl : word -> word.
+  Axiom min max : word -> word -> word.
+  Extract Inlined Constant word => "Word.word".
+  Extract Inlined Constant zero => "(Word.fromInt 0)".
+  Extract Inlined Constant one => "(Word.fromInt 1)".
+  Extract Inlined Constant double => "(fun x -> x << Word.fromInt 1)".
+  Extract Inlined Constant wordSize => "Word.wordSize".
+  Extract Inlined Constant toInt => "Word.toInt".
+  Extract Inlined Constant toIntX => "Word.toIntX".
+  Extract Inlined Constant fromInt => "Word.fromInt".
+  Extract Inlined Constant andb => "(fun x y -> Word.andb (x, y))".
+  Extract Inlined Constant orb => "(fun x y -> Word.orb (x, y))".
+  Extract Inlined Constant xorb => "(fun x y -> Word.xorb (x, y))".
+  Extract Inlined Constant notb => "Word.notb".
+  Extract Inlined Constant add => "(fun x y -> Word.add (x, y))".
+  Extract Inlined Constant sub => "(fun x y -> Word.sub (x, y))".
+  Extract Inlined Constant mul => "(fun x y -> Word.mul (x, y))".
+  Extract Inlined Constant div => "(fun x y -> Word.div (x, y))".
+  Extract Inlined Constant mod => "(fun x y -> Word.mod (x, y))".
+  Extract Inlined Constant lt => "(fun x y -> x < y)".
+  Extract Inlined Constant le => "(fun x y -> x <= y)".
+  Extract Inlined Constant eq => "(fun x y -> x = y)".
+  Extract Inlined Constant gt => "(fun x y -> x > y)".
+  Extract Inlined Constant ge => "(fun x y -> x >= y)".
+  Extract Inlined Constant compl => "(fun x -> ~x)".
+  Extract Inlined Constant min => "(fun x y -> Word.min (x, y))".
+  Extract Inlined Constant max => "(fun x y -> Word.max (x, y))".
+End Word.
+
+(* TODO:
+   - Strings
+   - Order (then add compare to Int and Word)
+   - LargeInt and LargeWord 
+   - Misc Int and Word ops *)
