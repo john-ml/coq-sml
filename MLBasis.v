@@ -34,8 +34,13 @@ End TestMLNotation.
 (** * Booleans, pairs, options *)
 
 Extract Inductive bool => "bool" [ "true" "false" ].
-Extract Inductive prod => "(*)" [ "(fun x y -> (x, y))" ] "(fun k (x, y) -> k x y)".
+Extract Inductive prod => "( * )" [ "(fun x y -> (x, y))" ] "(fun k (x, y) -> k x y)".
 Extract Inductive option => "option" [ "SOME" "NONE" ].
+
+Module TestProd.
+Definition test_prod := fun '(x, y, z) => x + y + z.
+Extraction test_prod.
+End TestProd.
 
 (** * Integers *)
 
