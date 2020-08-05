@@ -31,11 +31,12 @@ Definition test_program {A B C D E} (pre : ML A) (f : B -> C -> ML D)
 Extraction test_program.
 End TestMLNotation.
 
-(** * Booleans, pairs, options *)
+(** * Booleans, pairs, options, lists *)
 
 Extract Inductive bool => "bool" [ "true" "false" ].
 Extract Inductive prod => "( * )" [ "(fun x y -> (x, y))" ] "(fun k (x, y) -> k x y)".
 Extract Inductive option => "option" [ "SOME" "NONE" ].
+Extract Inductive list => "list" [ "[]" "( :: )" ].
 
 Module TestProd.
 Definition test_prod := fun '(x, y, z) => x + y + z.
