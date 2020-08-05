@@ -53,6 +53,7 @@ End INTEGER.
 Module Int <: INTEGER.
   Axiom int : Set.
   Axiom zero one : int.
+  Axiom double : int -> int.
   Axiom minInt maxInt : option int.
   Axiom add mul sub div mod quot rem : int -> int -> ML int.
   Axiom lt le eq gt ge : int -> int -> bool.
@@ -62,6 +63,7 @@ Module Int <: INTEGER.
   Extract Inlined Constant int => "Int.int".
   Extract Inlined Constant zero => "0".
   Extract Inlined Constant one => "1".
+  Extract Inlined Constant double => "(fun x -> 2*x)".
   Extract Inlined Constant minInt => "Int.minInt".
   Extract Inlined Constant maxInt => "Int.maxInt".
   Extract Inlined Constant add => "(fun x y -> x + y)".
@@ -151,9 +153,3 @@ Module Word <: WORD.
   Extract Inlined Constant min => "(fun x y -> Word.min (x, y))".
   Extract Inlined Constant max => "(fun x y -> Word.max (x, y))".
 End Word.
-
-(* TODO:
-   - Strings
-   - Order (then add compare to Int and Word)
-   - LargeInt and LargeWord 
-   - Misc Int and Word ops *)
